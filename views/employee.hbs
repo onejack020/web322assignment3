@@ -142,7 +142,11 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="department ">Department</label>
-                            <select class="form-control" id="department" name="department" type="select" value="{{ employee.department}}">
+                            <select class="form-control" 
+                                    id="department" 
+                                    name="department" 
+                                    type="select" 
+                                    value="{{ employee.department}}">
                                 <option value="1" {{#equal employee.department "1" }}selected{{/equal}}>Creative Services</option>    
                                 <option value="2" {{#equal employee.department "2" }}selected{{/equal}}>Product Development</option>    
                                 <option value="3" {{#equal employee.department "3" }}selected{{/equal}}>Marketing</option>    
