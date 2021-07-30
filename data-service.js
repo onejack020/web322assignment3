@@ -101,6 +101,7 @@ module.exports.getEmployeesByDepartment = function (department) {
             }}));
         }).catch((err) => {
             reject("no results returned.",err);
+            console.log(err);
         });
     });
 }
@@ -111,7 +112,8 @@ module.exports.getEmployeesByManager = function (manager) {
             resolve(Employee.findAll({
                 where:{
                     employeeManagerNum: manager
-            }}));
+                }}
+            ));
         }).catch((err) => {
             reject("no results returned.",err);
             console.log(err);
@@ -249,7 +251,8 @@ module.exports.getDepartmentById = function (id) {
             resolve(Department.findAll({
                 where:{
                     departmentId: id
-            }}));
+                }}
+            ));
         }).catch((err) => {
             reject("no results returned.",err);
         });
@@ -262,7 +265,8 @@ module.exports.deleteDepartmentById = function (id) {
             resolve(Department.destroy({
                 where:{
                     departmentId: id
-            }}));
+                 }}
+            ));
         }).catch((err) => {
             reject("deletion rejected.");
         });
