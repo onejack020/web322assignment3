@@ -70,7 +70,7 @@ module.exports.getEmployeeByNum = function (num) {
             resolve(Employee.findAll({
                 where:{
                     employeeNum: num
-            }}));
+                }}));
         }).catch((err) => {
             reject("no results returned.");
         });
@@ -83,7 +83,8 @@ module.exports.getEmployeesByStatus = function (status) {
                 resolve(Employee.findAll({
                     where:{
                         status: status
-                }}));
+                    }})
+              );
             }).catch((err) => {
                 reject("no results returned.",err);
             });
@@ -263,7 +264,7 @@ module.exports.deleteDepartmentById = function (id) {
                     departmentId: id
             }}));
         }).catch((err) => {
-            reject("deletion rejected.",err);
+            reject("deletion rejected.");
         });
     });
 }
