@@ -60,6 +60,7 @@ module.exports.getAllEmployees = function(){
             resolve(Employee.findAll());
         }).catch((err) => {
             reject("no results returned");
+            console.log(err);
         });
     });
 }
@@ -73,6 +74,7 @@ module.exports.getEmployeeByNum = function (num) {
                 }}));
         }).catch((err) => {
             reject("no results returned.");
+            console.log(err);
         });
     });
 }
@@ -87,6 +89,7 @@ module.exports.getEmployeesByStatus = function (status) {
               );
             }).catch((err) => {
                 reject("no results returned.",err);
+                console.log(err);
             });
         });
     }
@@ -130,6 +133,7 @@ module.exports.deleteEmployeeByNum = function (empNum) {
                 }}));
         }).catch((err) => {
             reject("deleted");
+            console.log(err);
         });
     });
 }
@@ -222,6 +226,7 @@ module.exports.addDepartment = (departmentData) =>{
             resolve();
         }).catch((err)=>{
             reject("no results returned.",err);
+            console.log(err);
         })
     });
 })};
@@ -255,6 +260,7 @@ module.exports.getDepartmentById = function (id) {
             ));
         }).catch((err) => {
             reject("no results returned.",err);
+            console.log(err);
         });
     });
 }
@@ -269,6 +275,7 @@ module.exports.deleteDepartmentById = function (id) {
             ));
         }).catch((err) => {
             reject("deletion rejected.");
+            console.log(err);
         });
     });
 }
