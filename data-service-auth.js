@@ -14,7 +14,6 @@ var userSchema = new mongoose.Schema({
     }]
 });
 
-
 let User;
 
 module.exports.initialize = function () {
@@ -25,7 +24,7 @@ module.exports.initialize = function () {
         });
         db.once('open', () => {
            User = db.model("users", userSchema);
-           resolve("connected to database!");
+           resolve("Successfully connected to database!");
         });
     });
 },
@@ -36,14 +35,14 @@ module.exports.registerUser = (userData) => {
         reject('Passwords do not match');
       else {
         let newUser = User(userData);
-        newUser.save()
+         newUser.save()
           .then(() => {
             resolve();
           })
           .catch(err => {
             if (err.code == 11000)
-              reject('user name already taken')
-            if (err.code != 11000)
+              reject('User name already taken')
+            else if (err.code != 11000)
               reject(`There was an error creating the user: ${err}`);
           });
       }
@@ -57,23 +56,21 @@ module.exports.checkUser = (userData) => {
         .then(users => {
           bcrypt.compare(userData.password, users[0].password)
             .then((res) => {
-              users[0].loginHistory.push({ dateTime: (new Date()).toString(), userAgent: userData.userAgent });
-              User.update({ userName: users[0].userName },
-                { $set: { loginHistory: users[0].loginHistory } },
-                { multi: false })
-                .exec()
-                .then(() => {
-                  resolve(users[0]);
-                })
-                .catch((err) => {
+               users[0].loginHistory.push({ dateTime: (new Date()).toString(), userAgent: userData.userAgent });
+               User.update({ userName: users[0].userName },
+                   { $set: { loginHistory: users[0].loginHistory } },
+                   { multi: false })
+                  .exec()
+                  .then(() => {
+                    resolve(users[0]);
+                   })
+                  .catch((err) => {
                   reject(`There was an error verifying the user: ${err}`);
-                });
-            })
-            .catch((err) => {
+                 });
+               }).catch((err) => {
               reject(`Incorrect Password for user: ${userData.userName}`);
             })
-        })
-        .catch(err => {
+        }).catch(err => {
           reject(`Unable to find user: ${userData.userName}`);
         })
     });
